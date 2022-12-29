@@ -22,12 +22,13 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.my.R
 import com.example.my.model.Event
+import com.example.my.ui.CardViewModel
 import com.example.my.ui.screens.randomhobby.RandomHobbyViewModel
 
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CardEvents(event : Event)
+fun CardEvents(event : Event,viewModel: CardViewModel= hiltViewModel())
 {
     Box()
     {

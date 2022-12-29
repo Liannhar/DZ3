@@ -30,6 +30,7 @@ class EventsViewModel @Inject constructor(
         return events
     }
 
+
     fun getHobby(count:Int):Flow<Hobby?>
     {
         val hobbies = flow {

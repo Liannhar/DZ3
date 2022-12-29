@@ -27,13 +27,12 @@ constructor(private val firestore: FirebaseFirestore,
     StorageService {
 
 
-    override val hobbies: Flow<List<Hobby>> = flow {
+    override suspend fun hobbies(): List<Hobby>
+    {
         val snapshot = firestore.collection("Hobby").get().await()
         val hobbys = snapshot.toObjects(Hobby::class.java)
-
-        emit(hobbys)
-        }
-
+        return hobbys
+    }
     override suspend fun getImage(url:String): Flow<StorageReference> = flow {
         val storage = FirebaseStorage.getInstance()
         val gsReference = storage.getReferenceFromUrl(url)

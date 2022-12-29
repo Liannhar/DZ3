@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface StorageService {
-    val hobbies: Flow<List<Hobby>>
+    suspend fun hobbies(): List<Hobby>
 
     suspend fun getImage(url:String):Flow<StorageReference>
 

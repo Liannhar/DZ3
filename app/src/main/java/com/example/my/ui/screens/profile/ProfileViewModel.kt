@@ -14,8 +14,6 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val accountService: AccountService,
 ) : ViewModel() {
-    var uiState = mutableStateOf(ProfileUiState())
-        private set
 
     fun onBackButtonClick(openScreen: (String) -> Unit) = openScreen(START_SCREEN)
 

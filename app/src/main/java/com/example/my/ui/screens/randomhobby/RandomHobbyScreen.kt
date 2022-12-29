@@ -47,68 +47,61 @@ fun RandomHobbyScreen(
     val groupList = currentHobby.value?.let { viewModel.GroupList(it) }?.collectAsStateWithLifecycle(emptyList())
     val Modifiers = Modifier.padding(start=10.dp, top = 10.dp)
 
-    if(viewModel.showError.value) {
-        Column(
+
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+    )
+    {
+        Row(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
+                .background(Color.Blue), horizontalArrangement = Arrangement.SpaceBetween
         )
         {
-            Row(
+            Icon(
+                Icons.Rounded.ArrowBack,
+                contentDescription = "Back",
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.Blue), horizontalArrangement = Arrangement.SpaceBetween
+                    .size(30.dp)
+                    .clickable { viewModel.onBackButtonClick(onBackButtonClicked) }
             )
-            {
-                Icon(
-                    Icons.Rounded.ArrowBack,
-                    contentDescription = "Back",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clickable { viewModel.onBackButtonClick(onBackButtonClicked) }
-                )
-                Text(
-                    currentHobby.value!!.title,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
-                Icon(
-                    Icons.Rounded.MonitorHeart,
-                    contentDescription = "Like",
-                    modifier = Modifier
-                        .size(30.dp)
-                )
-            }
+            Text(
+                currentHobby.value!!.title,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            Icon(
+                Icons.Rounded.MonitorHeart,
+                contentDescription = "Like",
+                modifier = Modifier
+                    .size(30.dp)
+            )
+        }
 
-            Image(
-                painter = painterResource(id = R.drawable.skates),
-                contentDescription = "",
-                contentScale = ContentScale.Fit
-            )
-            //GlideImage(model =  painterResource(id = R.drawable.skates), contentDescription = "",contentScale = ContentScale.Fit)
-            Text(text = stringResource(id = R.string.events), modifier = Modifiers)
-            LazyRow {
-                if (eventList != null) {
-                    items(eventList.value, key = { it.id }) { event ->
-                        CardEvents(
-                            event = event
-                        )
-                    }
+        Image(
+            painter = painterResource(id = R.drawable.skates),
+            contentDescription = "",
+            contentScale = ContentScale.Fit
+        )
+        //GlideImage(model =  painterResource(id = R.drawable.skates), contentDescription = "",contentScale = ContentScale.Fit)
+        Text(text = stringResource(id = R.string.events), modifier = Modifiers)
+        LazyRow {
+            if (eventList != null) {
+                items(eventList.value, key = { it.id }) { event ->
+                    CardEvents(
+                        event = event)
                 }
             }
-            Text(text = stringResource(id = R.string.groups), modifier = Modifiers)
-            LazyRow {
-                if (groupList != null) {
-                    items(groupList.value, key = { it.id }) { group ->
-                        CardGroups(
-                            group = group
-                        )
-                    }
+        }
+        Text(text = stringResource(id = R.string.groups), modifier = Modifiers)
+        LazyRow {
+            if (groupList != null) {
+                items(groupList.value, key = { it.id }) { group ->
+                    CardGroups(
+                        group = group
+                    )
                 }
             }
         }
     }
-    else
-    {
-        CircularProgressIndicator(color = MaterialTheme.colors.onBackground)
-    }
-
 }
