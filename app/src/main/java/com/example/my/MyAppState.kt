@@ -12,7 +12,6 @@ class MakeItSoAppState(
     val scaffoldState: ScaffoldState,
     val navController: NavHostController,
     private val resources: Resources,
-    coroutineScope: CoroutineScope
 ) {
 
     fun popUp() {

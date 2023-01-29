@@ -56,7 +56,7 @@ fun Events(onBackButtonClicked: (String) -> Unit,
                 Text(text = stringResource(id = R.string.SaveEvents), modifier = Modifiers)
             }
             LazyColumn(){
-                val hobbies = viewModel.hobbies
+
                 for (count in NameofHobbies.indices)
                 {
 //                    /val currentHobby = viewModel.getHobby(count)

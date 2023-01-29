@@ -19,7 +19,6 @@ import kotlin.random.Random
 class EventsViewModel @Inject constructor(
     private val storageService: StorageService,
 ) : ViewModel() {
-    val hobbies = storageService.hobbies
 
     fun EventList(hobby: Hobby): Flow<List<Event>>
     {

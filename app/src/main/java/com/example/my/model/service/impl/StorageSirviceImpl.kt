@@ -23,8 +23,7 @@ class StorageServiceImpl
 @Inject
 constructor(private val firestore: FirebaseFirestore,
 
-) :
-    StorageService {
+) : StorageService {
 
 
     override suspend fun hobbies(): List<Hobby>

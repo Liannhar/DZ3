@@ -27,11 +27,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.example.my.common.composable.CardEvents
+import com.example.my.common.composable.CardGroups
 import com.example.my.model.Event
 import com.example.my.model.Group
 import com.example.my.model.Hobby
-import com.example.my.ui.screens.CardEvents
-import com.example.my.ui.screens.CardGroups
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 
@@ -42,9 +42,9 @@ fun RandomHobbyScreen(
     onBackButtonClicked: (String, String) -> Unit,
     viewModel: RandomHobbyViewModel= hiltViewModel())
 {
-    val currentHobby = viewModel.RandomHobby().collectAsStateWithLifecycle(initialValue = Hobby("Basketball"))
-    val eventList = currentHobby.value?.let { viewModel.EventList(it) }?.collectAsStateWithLifecycle(emptyList())
-    val groupList = currentHobby.value?.let { viewModel.GroupList(it) }?.collectAsStateWithLifecycle(emptyList())
+    val currentHobby = viewModel.getRandomHobby()
+    val eventList = viewModel.getEvents(currentHobby)
+    val groupList =viewModel.getGroups(currentHobby)
     val Modifiers = Modifier.padding(start=10.dp, top = 10.dp)
 
 
@@ -67,7 +67,7 @@ fun RandomHobbyScreen(
                     .clickable { viewModel.onBackButtonClick(onBackButtonClicked) }
             )
             Text(
-                currentHobby.value!!.title,
+                currentHobby.name,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             Icon(
@@ -86,21 +86,17 @@ fun RandomHobbyScreen(
         //GlideImage(model =  painterResource(id = R.drawable.skates), contentDescription = "",contentScale = ContentScale.Fit)
         Text(text = stringResource(id = R.string.events), modifier = Modifiers)
         LazyRow {
-            if (eventList != null) {
-                items(eventList.value, key = { it.id }) { event ->
-                    CardEvents(
-                        event = event)
-                }
+            items(eventList, key = { it.id }) { event ->
+                CardEvents(
+                    event = event)
             }
         }
         Text(text = stringResource(id = R.string.groups), modifier = Modifiers)
         LazyRow {
-            if (groupList != null) {
-                items(groupList.value, key = { it.id }) { group ->
-                    CardGroups(
-                        group = group
-                    )
-                }
+            items(groupList, key = { it.id }) { group ->
+                CardGroups(
+                    group = group
+                )
             }
         }
     }

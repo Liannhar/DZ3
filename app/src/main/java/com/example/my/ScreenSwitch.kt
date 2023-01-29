@@ -68,10 +68,9 @@ fun rememberAppState(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     navController: NavHostController = rememberNavController(),
     resources: Resources = resources(),
-    coroutineScope: CoroutineScope = rememberCoroutineScope()
 ) =
-    remember(scaffoldState, navController, resources, coroutineScope) {
-        MakeItSoAppState(scaffoldState, navController,resources, coroutineScope)
+    remember(scaffoldState, navController, resources) {
+        MakeItSoAppState(scaffoldState, navController,resources)
     }
 
 @Composable

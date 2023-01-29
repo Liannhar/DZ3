@@ -3,7 +3,7 @@ package com.example.my.model
 import com.google.firebase.firestore.DocumentId
 
 data class Hobby (
-    @DocumentId val id: String="",
+    val id: String="",
     val name: String = "",
     val image: String ="",
     val description:String="",
