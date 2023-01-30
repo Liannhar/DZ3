@@ -33,9 +33,9 @@ android {
         }
     }
     packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE-FIREBASE.txt'
-        exclude 'META-INF/NOTICE'
+        resources {
+            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/LICENSE', 'META-INF/LICENSE-FIREBASE.txt', 'META-INF/NOTICE']
+        }
     }
 
     compileOptions {
@@ -50,11 +50,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.1.1'
-    }
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
     }
 }
 
